@@ -1,8 +1,5 @@
 ﻿namespace Dicionario
 {
-    using System;
-    using System.Collections.Generic;
-
     class Program
     {
         static void Main()
@@ -19,20 +16,18 @@
 
         static Dictionary<string, int> ContarPalavras(string texto)
         {
-            Dictionary<string, int> contador = new Dictionary<string, int>();
-            string[] palavras = texto.Split(new[] { ' ', '.', ',', ';', ':', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            Dictionary<string, int> contador = new();
+            string[] palavras = texto.ToLower().Split(new[] { ' ', '.', ',', ';', ':', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string palavra in palavras)
             {
-                string palavraFormatada = palavra.ToLower();
-
-                if (contador.ContainsKey(palavraFormatada))
+                if (contador.ContainsKey(palavra))
                 {
-                    contador[palavraFormatada]++;
+                    contador[palavra]++;
                 }
                 else
                 {
-                    contador[palavraFormatada] = 1;
+                    contador[palavra] = 1;
                 }
             }
 

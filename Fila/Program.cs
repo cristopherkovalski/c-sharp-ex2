@@ -1,8 +1,5 @@
 ﻿namespace Fila
 {
-    using System;
-    using System.Collections.Generic;
-
     class Program
     {
         static void Main()
@@ -22,20 +19,21 @@
             }
 
             Random random = new Random();
-            int quantidadePasses = random.Next(1, 100); 
-            Console.WriteLine($"Quantidade de passes até a batata explodir: {quantidadePasses}");
 
             while (filaDeJogadores.Count > 1)
             {
-                for (int i = 1; i < quantidadePasses; i++)
+                // O ideal é que cada rodada tenha um número de passes diferente, para que o jogo seja menos previsivel
+                int quantidadePasses = random.Next(1, 100);
+                Console.WriteLine($"Quantidade de passes até a batata explodir: {quantidadePasses}");
+
+                // Pelo nome da variavel, os passes devem ser completados antes de a batata explodir
+                for (int i = 1; i <= quantidadePasses; i++)
                 {
-                    
                     int jogadorAtual = filaDeJogadores.Dequeue();
                     filaDeJogadores.Enqueue(jogadorAtual);
                 }
                 int jogadorEliminado = filaDeJogadores.Dequeue();
                 Console.WriteLine($"Jogador {jogadorEliminado} está fora!");
-                quantidadePasses = random.Next(1, 101); 
             }
             int jogadorVencedor = filaDeJogadores.Dequeue();
             Console.WriteLine($"Jogador {jogadorVencedor} é o vencedor!");
